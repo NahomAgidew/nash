@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A professional software freelance company">
+    <meta name="author" content="Nahom Abi">
+
+    <title>Projects</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{{url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{{url_for('static', filename='vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="{{url_for('static', filename='vendor/magnific-popup/magnific-popup.css')}}" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="{{url_for('static', filename='css/creative.min.css')}}" rel="stylesheet">
+
+    <style type="text/css">
+    	body {
+		padding-top: 50px;
+		}
+		.starter-template {
+		padding: 40px 15px;
+		text-align: center;
+		}
+    </style>
+
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Dashboard</a>
+        </div>
+      </div>
+    </nav>
+
+    {% if not proj %}
+    	<div class="container">
+	      <div class="starter-template">
+	        <h1>You have no projects yet.</h1>
+	        <button type="button" class="btn btn-lg btn-primary" onclick="mail()">Order Product</button>
+	      </div>
+	    </div>
+    {% endif %}
+
+    <script type="text/javascript">
+    	function mail() {
+    		location.href = "mailto:yourname@yourdomain.com"
+    	}
+    </script>
+
+    {% if proj %}
+    	<div class="container">
+		  <h2>Your Projects</h2>
+			  <ul class="list-group">
+			  	{% for p in proj %}
+				    {% if p['project_name'] %}
+				    	<li class="list-group-item">{{ p['project_name'] }} 
+				    {% endif %}
+				    {% if p['progress'] %}
+				    	<div class="progress">
+					    <div class="progress-bar" role="progressbar" aria-valuenow="{{ p['progress'] }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ p['progress'] }}%">
+					      {{ p['progress']}}%
+					    </div>
+					  	</div></li>
+				    {% endif %}
+			  	{% endfor %}
+			  </ul>
+		</div>
+    {% endif %}
+
+
+	<!-- jQuery -->
+    <script src="{{url_for('static', filename='vendor/jquery/jquery.min.js')}}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="{{url_for('static', filename='vendor/scrollreveal/scrollreveal.min.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="{{url_for('static', filename='js/creative.min.js')}}"></script>
+</body>
+</html>
